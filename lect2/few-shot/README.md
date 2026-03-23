@@ -42,7 +42,7 @@ for item in my_list:
 * do not use extranl packages.
 
 
-## Outpt:
+## Output:
 
 Provide clean Markdown text with answers to each question in the task.
 The output should be ready to copy and paste into a `.md` file.
