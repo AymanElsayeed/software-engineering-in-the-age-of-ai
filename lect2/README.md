@@ -26,9 +26,6 @@ This folder contains an experiment that compares how different prompting styles 
 - `task-g.md`  
   GPT's answer for the main task.
 
-- `doc.md`  
-  Prompt + response notes used while building the few-shot material.
-
 - `few-shot/`  
   Files related to the few-shot method:
   - `few-shot.md` - few-shot prompt draft and response notes.
