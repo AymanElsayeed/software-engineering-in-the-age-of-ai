@@ -6,8 +6,8 @@ This folder contains an experiment that compares how different prompting styles 
 
 1. Define a Python task/prompt.
 2. Run it with two prompting methods:
-   - Few-shot
-   - Chain-of-Thought (CoT)
+   - [Few-shot](./few-shot/)
+   - [Chain-of-Thought (CoT)](./cot/)
 3. Compare outputs from two models:
    - Claude
    - GPT
@@ -17,31 +17,31 @@ This folder contains an experiment that compares how different prompting styles 
 - `README.md`  
   This file. Explains what each file/folder in `lect2` means.
 
-- `taks.md`  
+- [`taks.md`](./task.md)  
   Base assignment/prompt template used in this lecture.
 
-- `task-c.md`  
+- [`task-c.md`](./task-c.md)  
   Claude's answer for the main task.
 
-- `task-g.md`  
+- [`task-g.md`](./task-g.md)  
   GPT's answer for the main task.
 
-- `few-shot/`  
+- [`few-shot/`](./few-shot/)  
   Files related to the few-shot method:
-  - `few-shot.md` - few-shot prompt draft and response notes.
-  - `few-shot-c.md` - Claude few-shot output.
-  - `few-shot-g.md` - GPT few-shot output.
+  - [`few-shot.md`](./few-shot/) - few-shot prompt draft and response notes.
+  - [`few-shot-c.md`](./few-shot/few-shot-c.md) - Claude few-shot output.
+  - [`few-shot-g.md`](./few-shot/few-shot-g.md) - GPT few-shot output.
 
-- `cot/`  
+- [`cot/`](./cot/)  
   Files related to Chain-of-Thought method:
-  - `Cot.md` - CoT prompt and instructions flow.
-  - `Cot-c.md` - Claude CoT output.
-  - `Cot-g.md` - GPT CoT output.
+  - [`Cot.md`](./cot) - CoT prompt and instructions flow.
+  - [`Cot-c.md`](./cot/Cot-c.md) - Claude CoT output.
+  - [`Cot-g.md`](./cot/Cot-g.md) - GPT CoT output.
 
-- `comparison/`  
+- [`comparison/`](./comparison/)  
   Side-by-side evaluation files:
-  - `comparison-fs.md` - comparison of few-shot outputs (`few-shot-c.md` vs `few-shot-g.md`).
-  - `comparison-cot.md` - comparison of CoT outputs (`Cot-c.md` vs `Cot-g.md`).
+  - [`comparison-fs.md`](./comparison/comparison-fs.md) - comparison of few-shot outputs (`few-shot-c.md` vs `few-shot-g.md`).
+  - [`comparison-cot.md`](./comparison/comparison-cot.md) - comparison of CoT outputs (`Cot-c.md` vs `Cot-g.md`).
 
 
 ## File Name Conventions
