@@ -31,7 +31,7 @@ When i answer those questions, then do:
 * wirte psudo code
 * write Python code
 
-## outpt:
+## output:
 
 clean text with answer to each question on the task.
 the output text shold be for .md file so i can copy paste the answer and save it in a file.
