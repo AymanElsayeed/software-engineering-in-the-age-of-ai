@@ -11,7 +11,7 @@ i'm student who study how to program in Python, i'm learning the basics.
 
 ## Task:
 
-* i want to find an itme in a data structe in Python
+* Write a Python fuction given a data structure and an item the fuction check if the item exists the data structure or not
 
 ## Constrains:
 
