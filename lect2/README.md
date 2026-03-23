@@ -43,8 +43,6 @@ This folder contains an experiment that compares how different prompting styles 
   - `comparison-fs.md` - comparison of few-shot outputs (`few-shot-c.md` vs `few-shot-g.md`).
   - `comparison-cot.md` - comparison of CoT outputs (`Cot-c.md` vs `Cot-g.md`).
 
-- `loopOverTuples.py`  
-  A Python example file generated from one of the prompting tasks.
 
 ## File Name Conventions
 
