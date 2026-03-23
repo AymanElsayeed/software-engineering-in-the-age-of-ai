@@ -28,7 +28,7 @@ i'm student who study how to program in Python, i'm learning the basics.
 * What technical topic should i be fmiliar with?
 
 When i answer those questions, then do:
-* wirte psudo code
+* wirte pseudocode
 * write Python code
 
 ## output:
