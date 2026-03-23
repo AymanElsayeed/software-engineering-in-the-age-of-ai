@@ -67,4 +67,3 @@ This folder contains an experiment that compares how different prompting styles 
 3. Read comparisons:
    - `comparison/comparison-fs.md`
    - `comparison/comparison-cot.md`
-4. Optionally run/check `loopOverTuples.py` as a concrete code artifact.
