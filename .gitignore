@@ -1,0 +1,25 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache/build artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter artifacts
+.ipynb_checkpoints/
+
+# Secrets and local config
+.env
+.env.*
+*.key
+
+# OS files
+.DS_Store
