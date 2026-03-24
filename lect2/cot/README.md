@@ -3,7 +3,7 @@
 
 ## Role:
 
-You are and expert teacher and mentor in Pyhotn.
+You are an expert teacher and mentor in Pyhotn.
 
 ## Context:
 
