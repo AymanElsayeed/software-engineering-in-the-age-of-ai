@@ -1,0 +1,11 @@
+ticket,issue_type,urgency_level
+My laptop won’t turn on after yesterday’s update. I have a client demo in one hour and I can’t access any files.,Laptop won't turn on after update,5
+"The printer on floor 3 is showing a paper jam error, but there’s no paper stuck. Please check when possible.",printer error,3
+"I forgot my VPN password and can’t log in from home. Not urgent, but I need it reset before tomorrow morning.",VPN password reset,3
+Production website is down and customers are reporting checkout failures. This is impacting sales right now.,Website Down,1
+Can someone install Adobe Photoshop on my workstation this week? I need it for a new design project.,Software Installation,3
+"Email is delayed by about 10 minutes for all users in the finance team. No outages yet, but it’s causing confusion.",Email delay,3
+There is a suspicious login alert on my account from another country. Please investigate immediately.,suspicious login alert,5
+The office Wi-Fi in meeting room B keeps disconnecting during calls. It happens several times a day.,Wi-Fi connectivity issue,3
+Requesting access to the analytics dashboard for the marketing intern starting next Monday.,Access Request,3
+Database backup job failed overnight for the second day in a row. We need this fixed before the next backup window.,Database backup job failure,4
