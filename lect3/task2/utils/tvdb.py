@@ -8,9 +8,9 @@ import weaviate.classes as wvc
 import os
 import json
 from dotenv import load_dotenv
-from embeddings import embed_text
-import pandas as pd
-from logging_config import get_task2_logger
+from pathlib import Path
+from utils.embeddings import embed_text
+from utils.logging_config import get_task2_logger
 logger = get_task2_logger(__name__)
 
 
@@ -22,10 +22,24 @@ def connect_to_my_db() -> WeaviateClient:
     :return: WeaviateClient
     :rtype: WeaviateClient
     """
-    load_dotenv()
+    utils_env = Path(__file__).resolve().parent / ".env"
+    task_env = Path(__file__).resolve().parent.parent / ".env"
+    load_dotenv(dotenv_path=utils_env if utils_env.exists() else task_env)
+    cluster_url = (
+        os.getenv("WEAVIATE_CLUSTER_URL")
+        or os.getenv("WEAVIATE_URL")
+        or ""
+    ).strip().strip('"')
+    if cluster_url and not cluster_url.startswith(("http://", "https://")):
+        cluster_url = f"https://{cluster_url}"
+    api_key = (os.getenv("WEAVIATE_API_KEY") or "").strip().strip('"')
+    if not cluster_url:
+        raise RuntimeError("Missing WEAVIATE_CLUSTER_URL/WEAVIATE_URL in .env")
+    if not api_key:
+        raise RuntimeError("Missing WEAVIATE_API_KEY in .env")
     client = weaviate.connect_to_weaviate_cloud(
-        cluster_url=os.getenv("WEAVIATE_URL"),
-        auth_credentials=Auth.api_key(os.getenv("WEAVIATE_API_KEY")),
+        cluster_url=cluster_url,
+        auth_credentials=Auth.api_key(api_key),
     )
     logger.info(f"Connected to Weaviate database: {client.is_ready()}")
     return client
@@ -84,9 +98,10 @@ def hybrid_search(client: WeaviateClient, collection_name: str, query: str, top_
     return results
 
 def import_data_from_csv(client: WeaviateClient, limit = 12):
+    import pandas as pd
 
     csv_file_path = "/Users/aymanelsayeed/Library/Mobile Documents/com~apple~CloudDocs/Documents/Education/תואר שיני/תשפו/סמסטר ב/הנדסת תוכנה בעידן ה- AI/software-engineering-in-the-age-of-ai/vdb/train_df.csv"
-    collection_name = "Ticket"
+    collection_name = "Tickets"
     if not client.collections.exists(collection_name):
     #     client.collections.delete(collection_name)
         client.collections.create(
@@ -140,9 +155,9 @@ def import_data_from_csv(client: WeaviateClient, limit = 12):
     return True
 
 def rag(client: WeaviateClient, question: str):
-    tickets = client.collections.get("Ticket")
+    tickets = client.collections.get("Tickets")
     # question = "How to reset my password on my account"
-    rsponse = tickets.generate.near_text(query=question, limit=3,
+    response = tickets.generate.near_text(query=question, limit=3,
                                         single_prompt="""
                                         You are a helpful assistant that can answer questions about the tickets.
                                         You are given a question and a list of tickets.
@@ -151,28 +166,55 @@ def rag(client: WeaviateClient, question: str):
                                         The tickets are: {tickets}
                                         The answer is:
     """)
-    for result in results.objects:
+    for result in response.objects:
         print("body: ", result.properties["body"])
         print(f"explain_score: {result.metadata.explain_score}\n")  # What was the distance?
         print(f"score: {result.metadata.score}\n")
 
-# if __name__ == "__main__":
-#     client = connect_to_my_db()
-#     # collection = create_collection(client, "test_collection")
-#     # add_document_to_collection(client, "test_collection", "test_text2", "test_answer", {"source": "test"})
-#     # results = hybrid_search(client, "test_collection", "test_text2")
-#     # # print(results)
-#     # import_data_from_csv(client)
-#     # results = hybrid_search(client, "Ticket", "How to reset my password on my account")
-#     # for result in results.objects:
-#     #     # print(result.properties)
-#     #     print("body: ", result.properties["body"])
-#     # #     print(result.properties["answer"])
-#     #     # print(result.properties["meta_json"])
-#     #     # print(result.vector)
-#     #     # print(result.score)
-#     #     print(f"explain_score: {result.metadata.explain_score}\n")  # What was the distance?
-#     #     print(f"score: {result.metadata.score}\n")
+def add_cache_entry(question: str, answer: str, meta: dict):
+    client = connect_to_my_db()
+    try:
+        create_collection(client, "Ticket")
+        result = add_document_to_collection(client, "Ticket", question, answer, meta)
+        return result
+    finally:
+        client.close()
+
+def semantic_cache_lookup(question: str, threshold: float = 0.88) -> str | None:
+    client = connect_to_my_db()
+    try:
+        create_collection(client, "Ticket")
+        result = hybrid_search(client, "Ticket", question)
+        if not result.objects:
+            return None
+        best = result.objects[0]
+        score = float(getattr(best.metadata, "score", 0.0) or 0.0)
+        if score < threshold:
+            return None
+        return best.properties.get("answer")
+    finally:
+        client.close()
+
+if __name__ == "__main__":
+    # client = connect_to_my_db()
+    # collection = create_collection(client, "test_collection")
+    # add_document_to_collection(client, "test_collection", "test_text2", "test_answer", {"source": "test"})
+    # results = hybrid_search(client, "test_collection", "test_text2")
+    # # print(results)
+    # import_data_from_csv(client)
+    # results = hybrid_search(client, "Ticket", "How to reset my password on my account")
+    # for result in results.objects:
+    #     # print(result.properties)
+    #     print("body: ", result.properties["body"])
+    # #     print(result.properties["answer"])
+    #     # print(result.properties["meta_json"])
+    #     # print(result.vector)
+    #     # print(result.score)
+    #     print(f"explain_score: {result.metadata.explain_score}\n")  # What was the distance?
+    #     print(f"score: {result.metadata.score}\n")
     
-#     rag(client, "How to reset my password on my account")
-#     client.close()
+    # rag(client, "How to reset my password on my account")
+    # client.close()
+    # result = semantic_cache_lookup(question="How to reset my password on my account")
+    # print(result)
+    pass
