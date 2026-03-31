@@ -1,5 +1,6 @@
 # Task 2
-⸻
+
+
 •	Read (15 minutes): Design an architecture for a “smart support system powered by AI for enterprise customers.”
 •	Assignment: Include in your design the following components:
 
@@ -9,7 +10,6 @@
 4.	Access of the system to enterprise knowledge using RAG (Retrieval-Augmented Generation).
 5.	A HITL (Human-in-the-Loop) team where human customer service representatives validate the system’s actions.
 
-⸻
 
 
 Desing an architicture of Support System AI based.
