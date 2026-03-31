@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from logging_config import get_task2_logger
+from utils.logging_config import get_task2_logger
 
 logger = get_task2_logger(__name__)
 
