@@ -32,7 +32,24 @@ Some key challenges explored in this repository:
 1. **Non-Determinism**  
    The fundamental conflict between LLM behavior and traditional engineering requirements (predictability, repeatability, and reliability).
 
-2. *(More will be added...)*
+2. **Hallucinatins(false information)**
+   They can produce inaccuracies and hallucinations, confidently stating false or misleading information.
+
+3. **Train data bias**
+
+4. **Lack of common sense**
+
+5. **Limited multi-step logic**
+
+---
+
+# Production & Deployment challenges:
+
+1. Scalability planing
+2. Cost Management
+3. Security
+4. Continuous monitoring 
+5. Robust error handling
 
 ---
 
